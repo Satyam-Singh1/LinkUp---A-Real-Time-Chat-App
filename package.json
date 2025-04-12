@@ -1,7 +1,7 @@
 {
   "name": "chat-app",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "Backend2/src/index.js",
   "scripts": {
     "build": "npm install --prefix Backend2 && npm install --prefix Frontend && npm run build --prefix Frontend",
     "start": "node Backend2/src/index.js"
