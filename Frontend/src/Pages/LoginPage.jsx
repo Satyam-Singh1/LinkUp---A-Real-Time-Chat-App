@@ -1,129 +1,106 @@
 import { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
-import AuthImagePattern from "../Components/AuthImagePattern";
 import { Link } from "react-router-dom";
-import { Eye, EyeOff, Loader2, Lock, Mail, MessageSquare } from "lucide-react";
+import { Eye, EyeOff, Loader2, Lock, Mail, Bird } from "lucide-react";
+
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    email: "",
+     email: "",
     password: "",
   });
   const { login, isLoggingIn } = useAuthStore();
 
-  const handleSubmit = async (e) => {
+  //This handlesubmit is collecting the login data from the user and sending it to the login() function defined in our useAuthStore.
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     login(formData);
-  };
+  };  
 
   return (
-    <div className="h-screen grid lg:grid-cols-2">
-      {/* Left Side - Form */}
-      <div className="flex flex-col justify-center items-center p-6 sm:p-12">
-        <div className="w-full max-w-md space-y-8">
-          {/* Logo */}
-          <div className="text-center mb-8">
-            <div className="flex flex-col items-center gap-2 group">
-              <div
-                className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20
-              transition-colors"
-              >
-                <MessageSquare className="w-6 h-6 text-primary" />
+<div className="h-screen w-full grid lg:grid-cols-2 bg-gradient-to-br from-[var(--p)] via-[var(--a)] to-[var(--s)] text-base-content">
+      {/* Left: Form Section */}
+      <div className="flex items-center justify-center p-8">
+        <div className="bg-white/10 backdrop-blur-md rounded-xl shadow-xl w-full max-w-md p-8 space-y-6">
+          <div className="text-center">
+            <div className="flex flex-col items-center gap-2">
+              <div className="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center">
+                <Bird className="w-7 h-7 text-white" />
               </div>
-              <h1 className="text-2xl font-bold mt-2">Welcome Back</h1>
-              <p className="text-base-content/60">Sign in to your account</p>
+              <h2 className="text-3xl font-bold">Welcome Back</h2>
+              <p className="text-sm text-white/80">Log in to continue</p>
             </div>
           </div>
 
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text font-medium">Email</span>
-              </label>
+          <form onSubmit={handleSubmit} className="space-y-5">
+            <div>
+              <label className="block mb-1 font-medium">Email</label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-base-content/40" />
-                </div>
+                <Mail className="absolute left-3 top-3 text-white/50" />
                 <input
                   type="email"
-                  className={`input input-bordered w-full pl-10`}
+                  className="w-full pl-10 py-2 rounded-md bg-white/20 text-white placeholder-white/60 outline-none focus:ring-2 focus:ring-white"
                   placeholder="you@example.com"
                   value={formData.email}
-                  onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
-                  }
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 />
               </div>
             </div>
 
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text font-medium">Password</span>
-              </label>
+            <div>
+              <label className="block mb-1 font-medium">Password</label>
               <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-base-content/40" />
-                </div>
+                <Lock className="absolute left-3 top-3 text-white/50" />
                 <input
                   type={showPassword ? "text" : "password"}
-                  className={`input input-bordered w-full pl-10`}
+                  className="w-full pl-10 pr-10 py-2 rounded-md bg-white/20 text-white placeholder-white/60 outline-none focus:ring-2 focus:ring-white"
                   placeholder="••••••••"
                   value={formData.password}
-                  onChange={(e) =>
-                    setFormData({ ...formData, password: e.target.value })
-                  }
+                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 />
                 <button
                   type="button"
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  className="absolute right-3 top-2.5 text-white/60"
                   onClick={() => setShowPassword(!showPassword)}
                 >
-                  {showPassword ? (
-                    <EyeOff className="h-5 w-5 text-base-content/40" />
-                  ) : (
-                    <Eye className="h-5 w-5 text-base-content/40" />
-                  )}
+                  {showPassword ? <EyeOff /> : <Eye />}
                 </button>
               </div>
             </div>
 
             <button
               type="submit"
-              className="btn btn-primary w-full"
+              className="w-full py-2 rounded-md bg-white text-primary font-semibold hover:bg-white/90 transition"
               disabled={isLoggingIn}
             >
               {isLoggingIn ? (
-                <>
-                  <Loader2 className="h-5 w-5 animate-spin" />
-                  Loading...
-                </>
+                <span className="flex justify-center items-center gap-2">
+                  <Loader2 className="h-5 w-5 animate-spin" /> Loading...
+                </span>
               ) : (
                 "Sign in"
               )}
             </button>
           </form>
 
-          <div className="text-center">
-            <p className="text-base-content/60">
-              Don&apos;t have an account?{" "}
-              <Link to="/signup" className="link link-primary">
-                Create account
-              </Link>
-            </p>
-          </div>
+          <p className="text-center text-sm text-white/70">
+            Don’t have an account?{" "}
+            <Link to="/signup" className="underline font-medium text-white">
+              Create one
+            </Link>
+          </p>
         </div>
       </div>
 
-      {/* Right Side - Image/Pattern */}
-      <AuthImagePattern
-        title={"Welcome back!"}
-        subtitle={
-          "Sign in to continue your conversations and catch up with your messages."
-        }
-      />
+      {/* Right: Image/Info Panel */}
+      {/* <AuthImagePattern
+        title="Hello again!"
+        subtitle="Welcome to LinkUp — a place to stay connected and chat freely."
+      /> */}
     </div>
   );
 };
+
 export default LoginPage;
