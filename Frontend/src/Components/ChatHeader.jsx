@@ -1,7 +1,6 @@
 import { X, Video } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 import { useChatStore } from "../store/useChatStore";
-import { startVideoCall } from "../utils/videoCall";
 
 const ChatHeader = () => {
   const { selectedUser, setSelectedUser } = useChatStore();
