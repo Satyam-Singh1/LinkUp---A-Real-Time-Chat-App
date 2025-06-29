@@ -4,7 +4,7 @@ import SignUpPage from "./pages/SignUpPage";
 import LoginPage from "./pages/LoginPage";
 import SettingsPage from "./pages/SettingsPage";
 import ProfilePage from "./pages/ProfilePage";
-import VideoCall from "./components/VideoCall";
+// import VideoCall from "./components/VideoCall";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { useAuthStore } from "./store/useAuthStore";
 import { useThemeStore } from "./store/useThemeStore";
@@ -48,7 +48,7 @@ const App = () => {
         <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
         <Route path="/settings" element={<SettingsPage />} />
         <Route path="/profile" element={authUser ? <ProfilePage /> : <Navigate to="/login" />} />
-        <Route path="/video-call/:receiverId" element={<VideoCall />} />
+        {/* <Route path="/video-call/:receiverId" element={<VideoCall />} /> */}
       </Routes>
       <Toaster />
     </div>
