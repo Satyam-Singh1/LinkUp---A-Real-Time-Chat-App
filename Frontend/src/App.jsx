@@ -1,12 +1,12 @@
-
-import HomePage from "./pages/HomePage";
-import SignUpPage from "./pages/SignUpPage";
-import LoginPage from "./pages/LoginPage";
-import SettingsPage from "./pages/SettingsPage";
-import ProfilePage from "./pages/ProfilePage";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import React from "react";
+import HomePage from "./pages/HomePage.jsx";
+import SignUpPage from "./pages/SignUpPage.jsx";
+import LoginPage from "./pages/LoginPage.jsx";
+import SettingsPage from "./pages/SettingsPage.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx";
 import Navbar from "./components/Navbar";
 // import VideoCall from "./components/VideoCall";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { useAuthStore } from "./store/useAuthStore";
 import { useThemeStore } from "./store/useThemeStore";
 import { useEffect } from "react";
@@ -15,22 +15,12 @@ import { Toaster } from "react-hot-toast";
 
 const App = () => {
   const { theme } = useThemeStore();
-  const { authUser, checkAuth, isCheckingAuth, socket } = useAuthStore();
+  const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
   const navigate = useNavigate();
 
   useEffect(() => {
     checkAuth();
   }, [checkAuth]);
-
-  useEffect(() => {
-    if (!authUser || !socket) return;
-
-    socket.on("incoming-video-call", ({ roomUrl }) => {
-      navigate(`/video-call/${roomUrl}`);
-    });
-
-    return () => socket.off("incoming-video-call");
-  }, [authUser, socket, navigate]);
 
   if (isCheckingAuth && !authUser) {
     return (
@@ -47,9 +37,8 @@ const App = () => {
         <Route path="/" element={authUser ? <HomePage /> : <Navigate to="/login" />} />
         <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to="/" />} />
         <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
-        <Route path="/settings" element={<SettingsPage />} />
+        <Route path="/settings" element={authUser ? <SettingsPage /> : <Navigate to="/login" />} />
         <Route path="/profile" element={authUser ? <ProfilePage /> : <Navigate to="/login" />} />
-        {/* <Route path="/video-call/:receiverId" element={<VideoCall />} /> */}
       </Routes>
       <Toaster />
     </div>
