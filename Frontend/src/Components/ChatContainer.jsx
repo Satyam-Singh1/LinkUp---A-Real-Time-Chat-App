@@ -8,7 +8,7 @@ import MessageSkeleton from "./skeletons/MessageSkeleton";
 import { useAuthStore } from "../store/useAuthStore";
 import { formatMessageTime } from "../lib/utils";
 
-const ChatContainer = () => {
+export const ChatContainer = () => {
   const {
     messages,
     getMessages,
@@ -90,4 +90,4 @@ const ChatContainer = () => {
     </div>
   );
 };
-export default ChatContainer;
+

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import AuthImagePattern from "../components/AuthImagePattern";
 import toast from "react-hot-toast";
 
-const SignUpPage = () => {
+export const SignUpPage = () => {
 
   //State for controlling the visibility of entered password.
   const [showPassword, setShowPassword] = useState(false);
@@ -158,4 +158,4 @@ const SignUpPage = () => {
     </div>
   );
 };
-export default SignUpPage;
+

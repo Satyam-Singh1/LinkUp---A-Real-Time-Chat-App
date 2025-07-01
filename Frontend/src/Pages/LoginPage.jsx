@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Eye, EyeOff, Loader2, Lock, Mail, Bird } from "lucide-react";
 
 
-const LoginPage = () => {
+export const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
      email: "",
@@ -103,4 +103,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+
