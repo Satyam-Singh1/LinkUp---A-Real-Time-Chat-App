@@ -1,11 +1,10 @@
-import SignUpPage from "./pages/SignUpPage.jsx";
+import SignUpPage2 from "./Pages/SignUpPage2.jsx";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
-import {HomePage} from "./pages/HomePage.jsx";
-import {LoginPage} from "./pages/LoginPage.jsx";
-import {SettingsPage} from "./pages/SettingsPage.jsx";
-import {ProfilePage} from "./pages/ProfilePage.jsx";
+import {HomePage} from "./Pages/HomePage.jsx";
+import {LoginPage} from "./Pages/LoginPage.jsx";
+import {SettingsPage} from "./Pages/SettingsPage.jsx";
+import {ProfilePage} from "./Pages/ProfilePage.jsx";
 import {Navbar} from "./components/Navbar.jsx";
-// import VideoCall from "./components/VideoCall";
 import { useAuthStore } from "./store/useAuthStore.js";
 import { useThemeStore } from "./store/useThemeStore.js";
 import { useEffect } from "react";
@@ -34,7 +33,7 @@ import { Toaster } from "react-hot-toast";
       <Navbar />
       <Routes>
         <Route path="/" element={authUser ? <HomePage /> : <Navigate to="/login" />} />
-        <Route path="/signup" element={!authUser ? <SignUpPage /> : <Navigate to="/" />} />
+        <Route path="/signup" element={!authUser ? <SignUpPage2 /> : <Navigate to="/" />} />
         <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
         <Route path="/settings" element={authUser ? <SettingsPage /> : <Navigate to="/login" />} />
         <Route path="/profile" element={authUser ? <ProfilePage /> : <Navigate to="/login" />} />
