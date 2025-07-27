@@ -1,10 +1,10 @@
-import SignUpPage from "./pages/SignUpPage.jsx";
+import {SignUpPage} from "./pages/SignUpPage.jsx";
 import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
-import HomePage from "./pages/HomePage.jsx";
+import {HomePage} from "./pages/HomePage.jsx";
 import {LoginPage} from "./pages/LoginPage.jsx";
-import SettingsPage from "./pages/SettingsPage.jsx";
-import ProfilePage from "./pages/ProfilePage.jsx";
-import Navbar from "./components/Navbar.jsx";
+import {SettingsPage} from "./pages/SettingsPage.jsx";
+import {ProfilePage} from "./pages/ProfilePage.jsx";
+import {Navbar} from "./components/Navbar.jsx";
 // import VideoCall from "./components/VideoCall";
 import { useAuthStore } from "./store/useAuthStore.js";
 import { useThemeStore } from "./store/useThemeStore.js";
@@ -12,7 +12,7 @@ import { useEffect } from "react";
 import { Loader } from "lucide-react";
 import { Toaster } from "react-hot-toast";
 
-export const App = () => {
+ const App = () => {
   const { theme } = useThemeStore();
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
   const navigate = useNavigate();
@@ -45,3 +45,4 @@ export const App = () => {
 };
 
 
+export default App;

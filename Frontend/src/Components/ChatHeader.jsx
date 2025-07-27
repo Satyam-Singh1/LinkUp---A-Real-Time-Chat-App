@@ -2,7 +2,7 @@ import { X, Video } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 import { useChatStore } from "../store/useChatStore";
 
-const ChatHeader = () => {
+export const ChatHeader = () => {
   const { selectedUser, setSelectedUser } = useChatStore();
   const { authUser, onlineUsers, socket } = useAuthStore();
 
@@ -57,4 +57,4 @@ const ChatHeader = () => {
   );
 };
 
-export default ChatHeader;
+
