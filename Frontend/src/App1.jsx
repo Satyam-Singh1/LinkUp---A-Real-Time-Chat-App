@@ -11,7 +11,7 @@ import { useEffect } from "react";
 import { Loader } from "lucide-react";
 import { Toaster } from "react-hot-toast";
 
- const App = () => {
+ const App1 = () => {
   const { theme } = useThemeStore();
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
   const navigate = useNavigate();
@@ -44,4 +44,4 @@ import { Toaster } from "react-hot-toast";
 };
 
 
-export default App;
+export default App1;
