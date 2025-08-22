@@ -9,7 +9,7 @@ const io = new Server(server, {
   cors: {
     origin: [
       "http://localhost:5173", 
-      "https://68a8b2c56df11234a82611e5--linkupfrontend.netlify.app/" // your frontend URL
+      "https://68a8d1ff72ac699ed602ad41--linkupfrontend.netlify.app/" // your frontend URL
     ],
     credentials: true,
   },
