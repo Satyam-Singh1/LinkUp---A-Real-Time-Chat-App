@@ -21,7 +21,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173", 
-      "https://68a8dae7638784f171cb7396--linkupfrontend.netlify.app"
+      "https://linkupfrontend.netlify.app/"
       
     ],
     credentials: true,
