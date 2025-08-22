@@ -4,7 +4,7 @@ import {HomePage} from "./Pages/HomePage.jsx";
 import {LoginPage} from "./Pages/LoginPage.jsx";
 import {SettingsPage} from "./Pages/SettingsPage.jsx";
 import {ProfilePage} from "./Pages/ProfilePage.jsx";
-import {Navbar} from "./components/Navbar.jsx";
+import {Navbar} from "./Components/Navbar.jsx";
 import { useAuthStore } from "./store/useAuthStore.js";
 import { useThemeStore } from "./store/useThemeStore.js";
 import { useEffect } from "react";
