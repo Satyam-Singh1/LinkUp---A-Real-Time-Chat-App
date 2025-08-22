@@ -21,7 +21,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173", 
-      "https://linkup-a-real-time-chat-app.onrender.com"
+      "https://68a8b2c56df11234a82611e5--linkupfrontend.netlify.app/"
     ],
     credentials: true,
   })
