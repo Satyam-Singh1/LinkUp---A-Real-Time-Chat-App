@@ -15,13 +15,14 @@ export const useAuthStore = create((set, get) => ({
   socket: null,
 
   //Checking whether the user is authenticated or not and for showing a loading screen on refreshing the page.
+
   checkAuth: async () => {
     try {
       const res = await axiosInstance.get("/auth/check");
       //setting the authUser value to the user that we are getting from the backend.
       set({ authUser: res.data });
       get().connectSocket();
-    } catch (error) {
+    } catch (error) { 
       console.log("Error in checkAuth:", error);
       set({ authUser: null }); 
     } finally {
@@ -93,14 +94,14 @@ export const useAuthStore = create((set, get) => ({
     if (!authUser || get().socket?.connected) return;
 
     const socket = io(BASE_URL, {
-  query: { userId: authUser._id },
-  withCredentials: true,
-  transports: ["websocket"], // force websocket
-});
+    query: { userId: authUser._id },
+    withCredentials: true,
+    transports: ["websocket"], // force websocket
+        });
 
     socket.connect();
 
-    set({ socket: socket });
+    set({ socket: socket }); 
 
     socket.on("getOnlineUsers", (userIds) => {
       set({ onlineUsers: userIds });

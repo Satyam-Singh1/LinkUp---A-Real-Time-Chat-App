@@ -10,6 +10,7 @@ import { useThemeStore } from "./store/useThemeStore.js";
 import { useEffect } from "react";
 import { Loader } from "lucide-react";
 import { Toaster } from "react-hot-toast";
+import VideoCall from "./Components/VideoCall.jsx";
 
  const App1 = () => {
   const { theme } = useThemeStore();
@@ -37,6 +38,7 @@ import { Toaster } from "react-hot-toast";
         <Route path="/login" element={!authUser ? <LoginPage /> : <Navigate to="/" />} />
         <Route path="/settings" element={authUser ? <SettingsPage /> : <Navigate to="/login" />} />
         <Route path="/profile" element={authUser ? <ProfilePage /> : <Navigate to="/login" />} />
+        <Route path="/call/:id" element={authUser ? <VideoCall /> : <Navigate to="/login" />} />
       </Routes>
       <Toaster />
     </div>

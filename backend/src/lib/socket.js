@@ -9,12 +9,11 @@ const io = new Server(server, {
   cors: {
     origin: [
       "http://localhost:5173", 
-      "https://68a94c86902af1567973a7bc--linkupfrontend.netlify.app" // your frontend URL
+      "https://68a94c86902af1567973a7bc--linkupfrontend.netlify.app"
     ],
     credentials: true,
   },
 });
-
 
 export function getReceiverSocketId(userId) {
   return userSocketMap[userId];
@@ -31,6 +30,48 @@ io.on("connection", (socket) => {
 
   // io.emit() is used to send events to all the connected clients
   io.emit("getOnlineUsers", Object.keys(userSocketMap));
+
+  // Video call events
+  socket.on("callUser", (data) => {
+    const { userToCall, signalData, from, name, callId } = data;
+    const receiverSocketId = getReceiverSocketId(userToCall);
+    
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("callUser", {
+        signal: signalData,
+        from,
+        name,
+        callId
+      });
+    }
+  });
+
+  socket.on("answerCall", (data) => {
+    const { to, signal } = data;
+    const callerSocketId = getReceiverSocketId(to);
+    
+    if (callerSocketId) {
+      io.to(callerSocketId).emit("callAccepted", signal);
+    }
+  });
+
+  socket.on("rejectCall", (data) => {
+    const { to } = data;
+    const callerSocketId = getReceiverSocketId(to);
+    
+    if (callerSocketId) {
+      io.to(callerSocketId).emit("callRejected");
+    }
+  });
+
+  socket.on("endCall", (data) => {
+    const { to } = data;
+    const receiverSocketId = getReceiverSocketId(to);
+    
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("callEnded");
+    }
+  });
 
   socket.on("disconnect", () => {
     console.log("A user disconnected", socket.id);

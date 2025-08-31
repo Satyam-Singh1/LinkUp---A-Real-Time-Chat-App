@@ -1,25 +1,26 @@
 import { X, Video } from "lucide-react";
 import { useAuthStore } from "../store/useAuthStore";
 import { useChatStore } from "../store/useChatStore";
+import CallButton from "./CallButton";
 
 export const ChatHeader = () => {
   const { selectedUser, setSelectedUser } = useChatStore();
   const { authUser, onlineUsers, socket } = useAuthStore();
 
-  const handleVideoCall = () => {
-    if (!socket || !authUser || !selectedUser) return;
+  // const handleVideoCall = () => {
+  //   if (!socket || !authUser || !selectedUser) return;
 
-    if (!onlineUsers.includes(selectedUser._id)) {
-      alert("User is offline. Cannot initiate a video call.");
-      return;
-    }
+  //   if (!onlineUsers.includes(selectedUser._id)) {
+  //     alert("User is offline. Cannot initiate a video call.");
+  //     return;
+  //   }
 
-    startVideoCall({
-      socket,
-      fromUserId: authUser._id,
-      toUserId: selectedUser._id,
-    });
-  };
+  //   startVideoCall({
+  //     socket,
+  //     fromUserId: authUser._id,
+  //     toUserId: selectedUser._id,
+  //   });
+  // };
 
   return (
     <div className="p-2.5 border-b border-base-300">
@@ -43,9 +44,13 @@ export const ChatHeader = () => {
         {/* Right: Buttons */}
         <div className="flex items-center gap-2">
           {/* Video Call Button */}
-          <button onClick={handleVideoCall} title="Start Video Call">
+          {/* <button onClick={handleVideoCall} title="Start Video Call">
             <Video />
-          </button>
+          </button> */}
+          <CallButton 
+  receiverId={selectedUser._id} 
+  receiverName={selectedUser.fullName} 
+/>
 
           {/* Close Chat */}
           <button onClick={() => setSelectedUser(null)} title="Close Chat">
