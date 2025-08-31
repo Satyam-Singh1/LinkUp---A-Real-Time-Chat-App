@@ -23,8 +23,6 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173", 
-      "http://localhost:3000", // Add common React dev port
-      "https://satyam-singh1.github.io",
       "https://68a94c86902af1567973a7bc--linkupfrontend.netlify.app"
     ],
     credentials: true,
