@@ -24,7 +24,7 @@ app.use(
     origin: [
       "http://localhost:5173", 
       "https://68a94c86902af1567973a7bc--linkupfrontend.netlify.app",
-      "https://linkupchatapp.netlify.app/",
+      "https://68b472f30187f0f1f1c55981--linkupchatapp.netlify.app",
       "https://satyam-singh1.github.io"
     ],
     credentials: true,
