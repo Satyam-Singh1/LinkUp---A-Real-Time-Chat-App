@@ -10,7 +10,7 @@ const io = new Server(server, {
     origin: [
       "http://localhost:5173", 
       "https://68a94c86902af1567973a7bc--linkupfrontend.netlify.app",
-      "https://68b472f30187f0f1f1c55981--linkupchatapp.netlify.app",
+     "https://68b56d67b03f1c43e846a422--linkupchatapp.netlify.app",
       "https://satyam-singh1.github.io"
     ],
     credentials: true,
