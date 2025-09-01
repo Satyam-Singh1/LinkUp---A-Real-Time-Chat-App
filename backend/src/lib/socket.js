@@ -75,6 +75,40 @@ io.on("connection", (socket) => {
     }
   });
 
+  // Video call events
+  socket.on("initiateCall", (data) => {
+    const { receiverId, callId, callerInfo } = data;
+    const receiverSocketId = getReceiverSocketId(receiverId);
+    
+    console.log(`Call initiated by ${callerInfo.name} for ${receiverId}`);
+    
+    if (receiverSocketId) {
+      io.to(receiverSocketId).emit("incomingCall", {
+        callId,
+        caller: callerInfo,
+        timestamp: new Date().toISOString()
+      });
+    }
+  });
+
+  socket.on("acceptCall", (data) => {
+    const { callId, callerId } = data;
+    const callerSocketId = getReceiverSocketId(callerId);
+    
+    if (callerSocketId) {
+      io.to(callerSocketId).emit("callAccepted", { callId });
+    }
+  });
+
+  socket.on("rejectCall", (data) => {
+    const { callId, callerId } = data;
+    const callerSocketId = getReceiverSocketId(callerId);
+    
+    if (callerSocketId) {
+      io.to(callerSocketId).emit("callRejected", { callId });
+    }
+  });
+
   socket.on("disconnect", () => {
     console.log("A user disconnected", socket.id);
     delete userSocketMap[userId];
