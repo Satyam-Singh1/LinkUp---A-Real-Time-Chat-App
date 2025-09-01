@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Video, Phone } from "lucide-react";
+import { Video } from "lucide-react";
+import { useAuthStore } from "../store/useAuthStore.js";
 import toast from "react-hot-toast";
 
 const CallButton = ({ receiverId, receiverName }) => {
   const navigate = useNavigate();
+  const { initiateCall } = useAuthStore();
   const [isInitiatingCall, setIsInitiatingCall] = useState(false);
 
   const initiateVideoCall = async () => {
@@ -16,13 +18,13 @@ const CallButton = ({ receiverId, receiverName }) => {
       // Generate a unique call ID
       const callId = `call_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
       
+      // Notify the receiver about the incoming call
+      initiateCall(receiverId, callId);
+      
       // Navigate to the call page
       navigate(`/call/${callId}`);
       
-      // You can also emit a socket event to notify the other user
-      // This would require updating your socket implementation
-      
-      toast.success(`Starting video call with ${receiverName}`);
+      toast.success(`Calling ${receiverName}...`);
       
     } catch (error) {
       console.error("Error initiating call:", error);
