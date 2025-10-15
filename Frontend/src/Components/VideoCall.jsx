@@ -57,15 +57,13 @@ const VideoCall = () => {
 
       try {
         console.log("Fetching Stream token...");
-        const tokenData = await fetchStreamToken();
-        
+        const tokenData = await fetchStreamToken();   
         if (!tokenData || !tokenData.token) {
           throw new Error("No token received");
         }
 
         setStreamToken(tokenData);
         console.log("Initializing Stream video client...");
-
         const user = {
           id: authUser._id,
           name: authUser.fullName,

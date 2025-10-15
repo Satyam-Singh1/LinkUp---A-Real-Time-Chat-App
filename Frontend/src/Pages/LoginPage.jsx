@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuthStore } from "../store/useAuthStore";
 import { Link } from "react-router-dom";
 import { Eye, EyeOff, Loader2, Lock, Mail, Bird } from "lucide-react";
+import AuthImagePattern  from "../Components/AuthImagePattern"
 
 
 export const LoginPage = () => {
@@ -95,10 +96,10 @@ export const LoginPage = () => {
       </div>
 
       {/* Right: Image/Info Panel */}
-      {/* <AuthImagePattern
+      <AuthImagePattern
         title="Hello again!"
         subtitle="Welcome to LinkUp — a place to stay connected and chat freely."
-      /> */}
+      />
     </div>
   );
 };

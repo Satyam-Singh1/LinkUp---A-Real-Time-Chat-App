@@ -5,7 +5,7 @@ import { io } from "socket.io-client";
 
 const BASE_URL = "https://linkup-a-real-time-chat-app.onrender.com";
 
-export const useAuthStore = create((set, get) => ({
+export const useAuthStore = create((set, get) => ({ 
   authUser: null,
   isSigningUp: false,
   isLoggingIn: false,
