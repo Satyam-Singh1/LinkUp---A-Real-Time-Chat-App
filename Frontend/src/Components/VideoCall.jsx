@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuthStore } from "../store/useAuthStore.js";
+import { axiosInstance } from "../lib/axios.js";
 import toast from "react-hot-toast";
-import { Loader, Phone, PhoneOff, Video, VideoOff, Mic, MicOff } from "lucide-react";
+import { Loader } from "lucide-react";
 
 import {
   StreamVideo,
@@ -25,27 +26,16 @@ const VideoCall = () => {
   const [client, setClient] = useState(null);
   const [call, setCall] = useState(null);
   const [isConnecting, setIsConnecting] = useState(true);
-  const [streamToken, setStreamToken] = useState(null);
 
-  // Fetch Stream token from your backend
+  // Fetch Stream token using axios instance
   const fetchStreamToken = async () => {
     try {
-      const response = await fetch(`https://linkup-a-real-time-chat-app.onrender.com/api/stream/token`, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch Stream token');
-      }
-
-      const data = await response.json();
-      return data;
+      console.log("Fetching Stream token...");
+      const response = await axiosInstance.get("/stream/token");
+      console.log("Stream token received:", response.data);
+      return response.data;
     } catch (error) {
-      console.error("Error fetching Stream token:", error);
+      console.error("Error fetching Stream token:", error.response?.data || error.message);
       toast.error("Failed to get video call token");
       return null;
     }
@@ -53,17 +43,21 @@ const VideoCall = () => {
 
   useEffect(() => {
     const initCall = async () => {
-      if (!authUser || !callId) return;
+      if (!authUser || !callId) {
+        console.log("Missing authUser or callId");
+        setIsConnecting(false);
+        return;
+      }
 
       try {
-        console.log("Fetching Stream token...");
-        const tokenData = await fetchStreamToken();   
+        const tokenData = await fetchStreamToken();
+        
         if (!tokenData || !tokenData.token) {
           throw new Error("No token received");
         }
 
-        setStreamToken(tokenData);
         console.log("Initializing Stream video client...");
+
         const user = {
           id: authUser._id,
           name: authUser.fullName,
@@ -97,10 +91,10 @@ const VideoCall = () => {
     // Cleanup function
     return () => {
       if (call) {
-        call.leave();
+        call.leave().catch(err => console.log("Error leaving call:", err));
       }
       if (client) {
-        client.disconnectUser();
+        client.disconnectUser().catch(err => console.log("Error disconnecting:", err));
       }
     };
   }, [authUser, callId, navigate]);
