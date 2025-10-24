@@ -25,7 +25,7 @@ app.use(
       "http://localhost:5173", 
       "https://68a94c86902af1567973a7bc--linkupfrontend.netlify.app",
       "https://68b56d67b03f1c43e846a422--linkupchatapp.netlify.app",
-      "https://linkupfrontend.netlify.app/"
+      "https://linkupfrontend.netlify.app"
     ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
